@@ -128,6 +128,46 @@
             background-color: #0056b3;
         }
 
+        /* Estilos para a lista de dados (simulando a base de dados) */
+        #data-list {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #data-list h2 {
+            text-align: center;
+        }
+
+        #data-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #data-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Estilos para a carteira de pontos */
+        #points-wallet {
+            width: 100%;
+            max-width: 120px;
+            background-color: rgba(168, 168, 168, 0.8);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        #points-wallet h2 {
+            text-align: center;
+        }
+
+        #points-wallet p {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -137,9 +177,12 @@
     </header>
     
     <main>
-
+        <section id="points-wallet">
+            <h2>Carteira de Pontos</h2>
+            <p id="user-points">Pontos: 20</p>
+        </section>
         <section id="profile-link-box">
-            <h2>Compartilhe seu Perfil</h2>
+            <h2>Compartilhe seus Feeds Storys e Fotos</h2>
             <p class="copy">Divulgue seu perfil organicamente com potencial de tráfego pago. <a href="#">Saiba mais</a></p>
             <form id="postForm">
                 <label for="linkPostagem">Link do seu Perfil:</label>
@@ -149,51 +192,89 @@
         </section>
 
         <section id="shared-content-box">
-            <h2>Fotos e Feeds Compartilhados</h2>
+            <h2>Ganhe Pontos Curtindo e Comentando Feeds Storys e Fotos</h2>
             <div id="sharedContent">
-                <!-- Aqui serão exibidas as fotos e feeds compartilhados -->
+                <!-- Aqui serão exibidos os botões de acesso ao conteúdo compartilhado -->
             </div>
         </section>
+
+
+        </section>
+        
+
+
     </main>
 
     <footer>
-        &copy; 2023 Minha Rede Social
+        &copy; 2023 Criado Com o proposito de uma Divulgação organica de perfil de Rede Social
     </footer>
 
     <script>
-        // Função para adicionar conteúdo compartilhado
-        function addSharedContent(content) {
-            const sharedContent = document.getElementById('sharedContent');
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'postagem';
-            
-            // Botão "Abrir Link"
-            const openLinkButton = document.createElement('a');
-            openLinkButton.textContent = 'Abrir Link';
-            openLinkButton.href = content; // Define o link para o botão
-            openLinkButton.target = '_blank'; // Abrir o link em uma nova guia
-            contentDiv.appendChild(openLinkButton);
-            
-            sharedContent.appendChild(contentDiv);
+        // Simulação de base de dados
+        const database = [];
+        // Simulação de carteira de pontos para o usuário
+        let userPoints = 20; // Começa com 20 pontos
+        const userPointsDisplay = document.getElementById('user-points');
+
+        // Função para adicionar dados à "base de dados" (simulação)
+        function addToDatabase(data) {
+            database.push(data);
+            updateDatabaseList();
         }
 
-        // Função para compartilhar conteúdo
-        document.getElementById('postForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        // Função para atualizar a lista na página
+        function updateDatabaseList() {
+            // ... (código anterior) ...
+        }
+
+        // Função para adicionar conteúdo compartilhado
+function addSharedContent(content) {
+    const sharedContent = document.getElementById('sharedContent');
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'postagem';
+
+    // Botão "Acesso ao Link"
+    const openLinkButton = document.createElement('button');
+    openLinkButton.textContent = 'Acesso ao Link';
+    let isButtonClicked = false; // Variável para controlar se o botão foi clicado
+
+    openLinkButton.addEventListener('click', function () {
+        if (!isButtonClicked) { // Verifica se o botão não foi clicado antes
+            window.open(content, '_blank'); // Abre o link em uma nova guia
+            // Adiciona 1 ponto ao usuário ao clicar no botão
+            userPoints += 1;
+            updatePointsDisplay();
+            isButtonClicked = true; // Define a variável como true para evitar cliques repetidos
+            openLinkButton.disabled = true; // Desabilita o botão
+        }
+    });
+
+    contentDiv.appendChild(openLinkButton);
+    contentDiv.style.marginBottom = '10px'; // Adicione uma margem inferior de 10px entre os botões
+
+    sharedContent.appendChild(contentDiv);
+
+    // Diminui os pontos do usuário ao compartilhar
+    userPoints -= 2;
+    updatePointsDisplay();
+}
+
+
+        // Função para atualizar a exibição de pontos do usuário
+        function updatePointsDisplay() {
+            userPointsDisplay.textContent = `Pontos: ${userPoints}`;
+        }
+
+        // Função para processar o formulário de compartilhamento de perfil
+        const postForm = document.getElementById('postForm');
+        postForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o envio padrão do formulário
+
             const linkPostagem = document.getElementById('linkPostagem').value;
-            
-            // Verifique se o campo não está vazio
-            if (linkPostagem.trim() !== '') {
-                // Crie uma entrada com o conteúdo compartilhado
+            if (linkPostagem) {
+                addToDatabase(linkPostagem);
                 addSharedContent(linkPostagem);
-
-                // Limpe o campo após o compartilhamento
-                document.getElementById('linkPostagem').value = '';
-
-                // Remova o conteúdo compartilhado após 1 hora
-                setTimeout(function () {
-                    contentDiv.remove();
-                }, 3600000); // 1 hora em milissegundos
+                document.getElementById('linkPostagem').value = ''; // Limpa o campo após o compartilhamento
             }
         });
 
@@ -201,9 +282,13 @@
 
         // Exemplo de uso: adicionar conteúdo compartilhado após algum tempo (1 hora)
         setTimeout(function () {
-            const conteudoExemplo = '<p>Conteúdo compartilhado após 1 hora</p>';
+            const conteudoExemplo = 'https://exemplo.com';
             addSharedContent(conteudoExemplo);
         }, 3600000); // 1 hora em milissegundos
+
+        // Atualiza a lista da "base de dados" e os pontos do usuário na inicialização
+        updateDatabaseList();
+        updatePointsDisplay();
     </script>
 </body>
 </html>
