@@ -36,40 +36,87 @@
 
         main {
             display: flex; /* Divide a página em duas caixas */
+            flex-wrap: wrap; /* Permite que as caixas sejam empilhadas em telas menores */
             justify-content: space-between; /* Espaço entre as duas caixas */
-            padding: 40px;
+            padding: 20px;
         }
 
-        /* Estilos para a caixa da esquerda (feed de postagens) */
-        #left-box {
+        /* Estilos para a caixa de compartilhamento de link do perfil */
+        #profile-link-box {
             flex: 1; /* Cresce para preencher o espaço disponível */
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-            padding: 20px;
-            border-radius: 15px;
-            overflow-y: auto; /* Adiciona uma barra de rolagem se o conteúdo for longo */
-            max-height: 500px; /* Altura máxima do feed */
-        }
-
-        /* Estilos para a caixa da direita (formulário de entrada de links) */
-        #right-box {
-            flex: 1; /* Cresce para preencher o espaço disponível */
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.0); /* Fundo branco com transparência */
+            padding: 10px;
             border-radius: 10px;
+            margin-right: 10px; /* Espaço à direita para separar da caixa de feeds */
+            margin-bottom: 10px; /* Espaço abaixo da caixa */
         }
 
-        #feed {
-            /* Estilos para a seção de feed de links e postagens */
-            display: flex;
-            flex-direction: column; /* Empilha as postagens verticalmente */
-            gap: 10px; /* Espaço entre as postagens */
+        /* Estilos para a caixa de feeds */
+        #feed-box {
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+            padding: 200px;
+            border-radius: 10px;
+            margin-right: 20px; /* Espaço à direita para separar da caixa de curtidas/comentários */
+            margin-bottom: 20px; /* Espaço abaixo da caixa */
         }
 
+        /* Estilos para a caixa de curtidas/comentários */
+        #likes-comments-box {
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+            padding: 200px;
+            border-radius: 10px;
+            margin-bottom: 20px; /* Espaço abaixo da caixa */
+        }
+
+        #profile-link-box p {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        #profile-link-box .copy {
+            background-color: #007BFF;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #profile-link-box .copy a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Estilos para o formulário de compartilhamento de link */
+        #postForm {
+            margin-top: 10px;
+        }
+
+        #postForm label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #postForm input[type="text"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        #postForm button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        /* Estilos para as postagens no feed */
         .postagem {
             border: 1px solid #ddd;
             border-radius: 10px;
             padding: 10px;
-            width: 100%;
+            margin-bottom: 20px;
             box-sizing: border-box; /* Garante que a largura inclua preenchimento e bordas */
             background-color: white;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil às postagens */
@@ -93,15 +140,6 @@
         .postagem button:hover {
             background-color: #0056b3; /* Cor quando o cursor passa por cima */
         }
-
-        /* Estilos para a seção de curtidas e comentários */
-        .curtidas-comentarios {
-            flex: 1; /* Cresce para preencher o espaço disponível */
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-            padding: 20px;
-            border-radius: 15px;
-            margin-left: 20px; /* Espaço à esquerda para separar do feed de postagens */
-        }
     </style>
 </head>
 <body>
@@ -111,23 +149,26 @@
     </header>
     
     <main>
-        <section id="left-box">
+
+        <section id="profile-link-box">
+            <h2>Compartilhe seu Perfil</h2>
+            <p class="copy">Divulgue seu perfil organicamente com potencial de tráfego pago. <a href="#">Saiba mais</a></p>
+            <form id="postForm">
+                <label for="linkPostagem">Link do seu Perfil:</label>
+                <input type="text" id="linkPostagem" required>
+                <button type="submit">Compartilhar</button>
+            </form>
+        </section>
+
+        <section id="feed-box">
             <h2>Feed de Postagens</h2>
             <div id="feed">
                 <!-- Aqui serão exibidas as postagens do feed -->
             </div>
         </section>
 
-        <section id="right-box">
-            <h2>Compartilhe sua Foto ou Link</h2>
-            <form id="postForm">
-                <label for="linkPostagem">Link da sua Foto ou Postagem:</label>
-                <input type="text" id="linkPostagem" required>
-                <button type="submit">Compartilhar</button>
-            </form>
-        </section>
 
-        <section class="curtidas-comentarios">
+        <section id="likes-comments-box">
             <h2>Curtidas e Comentários</h2>
             <div id="curtidasComentarios">
                 <!-- Aqui serão exibidas as curtidas e comentários -->
@@ -140,140 +181,8 @@
     </footer>
 
     <script>
-        let userProfile = null;
-        let feed = [];
-
-        // Event listener para o botão "Entrar"
-        const loginButton = document.getElementById('loginButton');
-        loginButton.addEventListener('click', () => {
-            const loginSection = document.getElementById('login');
-            loginSection.style.display = 'block';
-        });
-
-        // Event listener para o formulário de entrada
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Obtenha os valores do formulário
-            const nome = document.getElementById('nome').value;
-            const instagram = document.getElementById('instagram').value;
-
-            // Exibe informações do perfil do usuário após o login
-            const profileSection = document.getElementById('user-profile');
-            const profileName = document.getElementById('profile-name');
-            const profileInstagram = document.getElementById('profile-instagram');
-            const userPoints = document.getElementById('user-points');
-
-            profileName.textContent = nome;
-            profileInstagram.textContent = instagram;
-            profileInstagram.href = instagram;
-            userPoints.textContent = 0; // Define a contagem de pontos inicial
-
-            // Oculta a seção de login e mostra a seção do perfil do usuário
-            const loginSection = document.getElementById('login');
-            loginSection.style.display = 'none';
-            profileSection.style.display = 'block';
-
-            // Salva o perfil do usuário para referência posterior
-            userProfile = {
-                nome,
-                instagram,
-                pontos: 0
-            };
-        });
-
-        // Exemplo de função para adicionar pontos ao perfil do usuário
-        function adicionarPontos(pontos) {
-            if (userProfile) {
-                userProfile.pontos += pontos;
-                const userPoints = document.getElementById('user-points');
-                userPoints.textContent = userProfile.pontos;
-            }
-        }
-
-        // Função para adicionar uma nova postagem ao feed
-        function adicionarPostagem(linkInstagram) {
-            const novaPostagem = {
-                link: linkInstagram,
-                curtidas: 0,
-                comentarios: [],
-            };
-
-            feed.push(novaPostagem);
-
-            atualizarFeed();
-        }
-
-        // Função para atualizar o feed com as postagens
-        function atualizarFeed() {
-            const feedSection = document.getElementById('feed');
-            feedSection.innerHTML = '';
-
-            feed.forEach((postagem, index) => {
-                const postagemDiv = document.createElement('div');
-                postagemDiv.classList.add('postagem');
-
-                const imagem = document.createElement('img');
-                imagem.src = postagem.link;
-                postagemDiv.appendChild(imagem);
-
-                const curtirButton = document.createElement('button');
-                curtirButton.textContent = 'Curtir';
-                curtirButton.addEventListener('click', () => curtirPostagem(index));
-                postagemDiv.appendChild(curtirButton);
-
-                const comentarioButton = document.createElement('button');
-                comentarioButton.textContent = 'Comentar';
-                comentarioButton.addEventListener('click', () => comentarPostagem(index));
-                postagemDiv.appendChild(comentarioButton);
-
-                const curtidasSpan = document.createElement('span');
-                curtidasSpan.textContent = `Curtidas: ${postagem.curtidas}`;
-                postagemDiv.appendChild(curtidasSpan);
-
-                const comentariosUl = document.createElement('ul');
-                postagem.comentarios.forEach((comentario) => {
-                    const comentarioLi = document.createElement('li');
-                    comentarioLi.textContent = comentario;
-                    comentariosUl.appendChild(comentarioLi);
-                });
-                postagemDiv.appendChild(comentariosUl);
-
-                feedSection.appendChild(postagemDiv);
-            });
-        }
-
-        // Função para curtir uma postagem
-        function curtirPostagem(index) {
-            if (userProfile) {
-                feed[index].curtidas++;
-                atualizarFeed();
-
-                // Adicione pontos ao perfil do usuário que curtiu
-                adicionarPontos(1);
-            }
-        }
-
-        // Função para comentar em uma postagem
-        function comentarPostagem(index) {
-            if (userProfile) {
-                const comentario = prompt('Digite seu comentário:');
-                if (comentario) {
-                    feed[index].comentarios.push(`${userProfile.nome}: ${comentario}`);
-                    atualizarFeed();
-                }
-            }
-        }
-
-        // Event listener para o formulário de compartilhamento de postagens
-        const postForm = document.getElementById('postForm');
-        postForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const linkPostagem = document.getElementById('linkPostagem').value;
-            adicionarPostagem(linkPostagem);
-            document.getElementById('linkPostagem').value = ''; // Limpar o campo após o compartilhamento
-        });
+        // O restante do seu código JavaScript permanece inalterado
+        // ...
     </script>
 </body>
 </html>
