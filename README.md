@@ -210,7 +210,7 @@
                 <br>
                 O aplicativo perfeito para aqueles que buscam conexões autênticas e crescimento na rede social! 🤝<br>
                 <br>
-                comece a acumular pontos enquanto sua presença na rede social decola! 📱💥<br>
+                Comece a acumular pontos enquanto sua presença na rede social decola! 📱💥<br>
                 <br>
                 #Compartilhar. #Curtir. #Comentar. #Crescer. 📈💫
             </p>
@@ -241,55 +241,58 @@
         // Simulação de carteira de pontos para o usuário
         let userPoints = 20; // Começa com 20 pontos
         const userPointsDisplay = document.getElementById('user-points');
-
+        const sharedLinks = new Set(); // Usado para rastrear links compartilhados
+    
         // Função para adicionar conteúdo compartilhado
         function addSharedContent(content) {
-            const sharedContent = document.getElementById('sharedContent');
-            const contentDiv = document.createElement('div');
-            contentDiv.className = 'postagem';
-
-            // Botão "Acesso ao Link"
-            const openLinkButton = document.createElement('button');
-            openLinkButton.textContent = 'Acesso ao Link';
-            openLinkButton.addEventListener('click', function () {
-                if (userPoints >= 2) { // Verifica se o usuário tem pelo menos 2 pontos
+            if (!sharedLinks.has(content)) {
+                sharedLinks.add(content); // Adiciona o link à lista de links compartilhados
+                const sharedContent = document.getElementById('sharedContent');
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'postagem';
+    
+                // Botão "Acesso ao Link"
+                const openLinkButton = document.createElement('button');
+                openLinkButton.textContent = 'Acesso ao Link';
+                openLinkButton.addEventListener('click', function () {
                     window.open(content, '_blank'); // Abre o link em uma nova guia
-                    // Remove 2 pontos do usuário ao clicar no botão
-                    userPoints -= 2;
+                    // Adiciona 1 ponto ao usuário ao abrir o link
+                    userPoints += 1;
                     updatePointsDisplay();
-                    openLinkButton.disabled = true; // Desabilita o botão após o compartilhamento
-                } else {
-                    alert('Você não tem pontos suficientes para compartilhar. Acumule pelo menos 2 pontos.');
-                }
-            });
-
-            contentDiv.appendChild(openLinkButton);
-            contentDiv.style.marginBottom = '10px'; // Adicione uma margem inferior de 10px entre os botões
-
-            sharedContent.appendChild(contentDiv);
+                    openLinkButton.disabled = true; // Desabilita o botão após abrir o link
+                });
+    
+                contentDiv.appendChild(openLinkButton);
+                contentDiv.style.marginBottom = '10px'; // Adicione uma margem inferior de 10px entre os botões
+    
+                sharedContent.appendChild(contentDiv);
+            }
         }
-
+    
         // Função para atualizar a exibição de pontos do usuário
         function updatePointsDisplay() {
             userPointsDisplay.textContent = `Pontos: ${userPoints}`;
         }
-
+    
         // Função para processar o formulário de compartilhamento de perfil
         const postForm = document.getElementById('postForm');
         postForm.addEventListener('submit', function (e) {
             e.preventDefault(); // Impede o envio padrão do formulário
-
+    
             const linkPostagem = document.getElementById('linkPostagem').value;
-            if (linkPostagem) {
+            if (linkPostagem && !sharedLinks.has(linkPostagem)) {
                 addSharedContent(linkPostagem);
                 userPoints -= 2; // Remove 2 pontos ao compartilhar
                 updatePointsDisplay(); // Atualiza a exibição de pontos
                 document.getElementById('linkPostagem').value = ''; // Limpa o campo após o compartilhamento
+            } else if (sharedLinks.has(linkPostagem)) {
+                alert('Este link já foi compartilhado.');
             }
         });
-
+    
         // Atualiza os pontos do usuário na inicialização
         updatePointsDisplay();
     </script>
+    
 </body>
 </html>
