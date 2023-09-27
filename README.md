@@ -175,8 +175,7 @@
                 background-color: #460202; /* Mudança de cor quando o cursor passa sobre o botão */
             }
         </style>
-        
-    </div>
+
 
 
     <div class="container">
