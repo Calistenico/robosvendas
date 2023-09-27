@@ -172,27 +172,28 @@
             // Adicionar botões de ação
             const actionButtons = document.createElement('div');
             actionButtons.className = 'action-buttons';
+            
+            // Botão "Abrir Link"
             const openLinkButton = document.createElement('a');
             openLinkButton.textContent = 'Abrir Link';
             openLinkButton.href = content; // Define o link para o botão
             openLinkButton.target = '_blank'; // Abrir o link em uma nova guia
-
             actionButtons.appendChild(openLinkButton);
+            
+            // Botão "Curtir"
             const likeButton = document.createElement('button');
             likeButton.textContent = 'Curtir';
-            const commentButton = document.createElement('button');
-            commentButton.textContent = 'Comentar';
-
             likeButton.addEventListener('click', function () {
                 // Ação de curtir (pode ser personalizada)
-                alert('Você curtiu esta postagem: ' + content);
             });
-
+            
+            // Botão "Comentar"
+            const commentButton = document.createElement('button');
+            commentButton.textContent = 'Comentar';
             commentButton.addEventListener('click', function () {
                 // Ação de comentar (pode ser personalizada)
-                alert('Você comentou nesta postagem: ' + content);
             });
-
+            
             actionButtons.appendChild(likeButton);
             actionButtons.appendChild(commentButton);
             contentDiv.appendChild(actionButtons);
@@ -201,31 +202,4 @@
         // Função para compartilhar conteúdo
         document.getElementById('postForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const linkPostagem = document.getElementById('linkPostagem').value;
-            
-            // Verifique se o campo não está vazio
-            if (linkPostagem.trim() !== '') {
-                // Crie uma entrada com o conteúdo compartilhado
-                const content = `<p>${linkPostagem}</p>`;
-                addSharedContent(content);
-
-                // Limpe o campo após o compartilhamento
-                document.getElementById('linkPostagem').value = '';
-
-                // Remova o conteúdo compartilhado após 1 hora
-                setTimeout(function () {
-                    contentDiv.remove();
-                }, 3600000); // 1 hora em milissegundos
-            }
-        });
-
-        // O restante do seu código JavaScript pode ser adicionado aqui
-
-        // Exemplo de uso: adicionar conteúdo compartilhado após algum tempo (1 hora)
-        setTimeout(function () {
-            const conteudoExemplo = '<p>Conteúdo compartilhado após 1 hora</p>';
-            addSharedContent(conteudoExemplo);
-        }, 3600000); // 1 hora em milissegundos
-    </script>
-</body>
-</html>
+            const linkPostagem = document.getElementById('linkPostagem').values
