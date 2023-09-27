@@ -284,5 +284,3 @@
 
         </div>
     </div>
-</body>
-</html>
