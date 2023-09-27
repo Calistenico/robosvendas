@@ -223,7 +223,7 @@
                 <button type="submit">Compartilhar</button>
             </form>
             <p class="copy">Cada compartilhamento custa 2 pontos.</p>
-    
+        </section>
 
         <section id="shared-content-box">
             <h2>Ganhe Pontos Curtindo e Comentando Feeds, Stories e Fotos</h2>
@@ -231,82 +231,13 @@
                 <!-- Aqui serão exibidos os botões de acesso ao conteúdo compartilhado -->
             </div>
         </section>
-   
+    </main>
 
     <footer>
         &copy; 2023 Criado com o propósito de uma divulgação orgânica de perfil de Rede Social
     </footer>
 
     <script>
-        // ...
-    
-        // Estrutura para armazenar links compartilhados temporariamente
-        const sharedLinksTemp = [];
-    
-        // Função para adicionar conteúdo compartilhado temporariamente
-        function addSharedContentTemp(content) {
-            // Adiciona o link à lista de links compartilhados temporariamente
-            sharedLinksTemp.push({ link: content, timestamp: new Date() });
-    
-            // Remove links mais antigos que 2 horas
-            const twoHoursAgo = new Date();
-            twoHoursAgo.setHours(twoHoursAgo.getHours() - 2);
-            sharedLinksTemp = sharedLinksTemp.filter(item => item.timestamp >= twoHoursAgo);
-    
-            // Atualiza a exibição de links compartilhados
-            updateSharedContent();
-        }
-    
-        // Função para atualizar a exibição de links compartilhados
-        function updateSharedContent() {
-            const sharedContent = document.getElementById('sharedContent');
-            sharedContent.innerHTML = ''; // Limpa o conteúdo anterior
-    
-            // Exibe os links compartilhados temporariamente
-            sharedLinksTemp.forEach(item => {
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'postagem';
-    
-                const openLinkButton = document.createElement('button');
-                openLinkButton.textContent = 'Acesso ao Link';
-                openLinkButton.addEventListener('click', function () {
-                    window.open(item.link, '_blank'); // Abre o link em uma nova guia
-                    // Adiciona 1 ponto ao usuário ao abrir o link
-                    userPoints += 1;
-                    updatePointsDisplay();
-                    openLinkButton.disabled = true; // Desabilita o botão após abrir o link
-                });
-    
-                contentDiv.appendChild(openLinkButton);
-                contentDiv.style.marginBottom = '10px';
-    
-                sharedContent.appendChild(contentDiv);
-            });
-        }
-    
-        // ...
-    
-        // Função para processar o formulário de compartilhamento de perfil
-        const postForm = document.getElementById('postForm');
-        postForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Impede o envio padrão do formulário
-    
-            const linkPostagem = document.getElementById('linkPostagem').value;
-            if (linkPostagem && !sharedLinks.has(linkPostagem)) {
-                addSharedContentTemp(linkPostagem);
-                userPoints -= 2; // Remove 2 pontos ao compartilhar
-                updatePointsDisplay(); // Atualiza a exibição de pontos
-                document.getElementById('linkPostagem').value = ''; // Limpa o campo após o compartilhamento
-            } else if (sharedLinks.has(linkPostagem)) {
-                alert('Este link já foi compartilhado.');
-            }
-        });
-    
-        // Atualiza os pontos do usuário e os links compartilhados temporariamente na inicialização
-        updatePointsDisplay();
-        updateSharedContent();
-   
-    
         // Simulação de carteira de pontos para o usuário
         let userPoints = 20; // Começa com 20 pontos
         const userPointsDisplay = document.getElementById('user-points');
@@ -362,3 +293,6 @@
         // Atualiza os pontos do usuário na inicialização
         updatePointsDisplay();
     </script>
+    
+</body>
+
