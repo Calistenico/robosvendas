@@ -144,6 +144,16 @@
             background-color: #460202;
         }
     </style>
+    
+		<script id="hotmart_launcher_script">
+			(function(l,a,u,n,c,h,e,r){l['HotmartLauncherObject']=c;l[c]=l[c]||function(){
+			(l[c].q=l[c].q||[]).push(arguments)},l[c].l=1*new Date();h=a.createElement(u),
+			e=a.getElementsByTagName(u)[0];h.async=1;h.src=n;e.parentNode.insertBefore(h,e)
+			})(window,document,'script','//launcher.hotmart.com/launcher.js','hot');
+
+			hot('account','8845d733-9cd8-32d4-ad83-747e45c37997');
+		</script>
+
 </head>
 <body>
     <h1 style="font-family: 'Arial Black', sans-serif; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);">
