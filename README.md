@@ -10,8 +10,8 @@
             margin: 0;
             padding: 0;
             background-image: url('https://neilpatel.com/wp-content/uploads/2019/07/ilustracao-representando-smartphone-com-post-do-ap.jpeg');
-            background-size: cover; /* Para cobrir toda a área do corpo */
-            background-repeat: no-repeat; /* Evita repetição da imagem de fundo */
+            background-size: cover;
+            background-repeat: no-repeat;
         }
 
         header {
@@ -36,62 +36,63 @@
 
         main {
             display: flex;
-            flex-direction: column; /* Alterado para uma coluna */
-            align-items: center; /* Centraliza o conteúdo na horizontal */
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
 
         /* Estilos para a caixa de compartilhamento de link do perfil */
-        #profile-link-box {
-            background-color: rgba(255, 255, 255, 0.8);
+        .content-box {
+            width: 100%;
+            max-width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
-        /* Estilos para a caixa de compartilhamento de fotos/feeds */
-        #shared-content-box {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        #profile-link-box p, #shared-content-box p {
-            font-size: 14px;
+        .content-box h2 {
             text-align: center;
+            margin-bottom: 10px;
         }
 
-        #profile-link-box .copy, #shared-content-box .copy {
-            background-color: #007BFF;
+        .content-box p {
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .copy {
+            background-color: #434446;
             color: white;
-            padding: 5px;
+            padding: 10px;
             border-radius: 5px;
             text-align: center;
+            margin-top: 11px;
         }
 
-        #profile-link-box .copy a, #shared-content-box .copy a {
+        .copy a {
             color: white;
             text-decoration: none;
         }
 
         /* Estilos para o formulário de compartilhamento de link */
-        #postForm {
-            margin-top: 10px;
-        }
-
         #postForm label {
             display: block;
             margin-bottom: 5px;
+            font-weight: bold;
         }
 
         #postForm input[type="text"] {
             width: 100%;
             padding: 5px;
             margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
-        #postForm button {
+        #postForm button[type="submit"] {
             background-color: #007BFF;
             color: white;
             border: none;
@@ -117,7 +118,7 @@
         }
 
         .action-buttons button:first-child {
-            margin-right: 5px; /* Adiciona margem à direita para separar os botões */
+            margin-right: 5px;
         }
 
         .action-buttons a {
@@ -128,45 +129,62 @@
             background-color: #0056b3;
         }
 
-        /* Estilos para a lista de dados (simulando a base de dados) */
-        #data-list {
-            width: 100%;
-            max-width: 400px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        #data-list h2 {
-            text-align: center;
-        }
-
-        #data-list ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        #data-list li {
-            margin-bottom: 10px;
-        }
-
         /* Estilos para a carteira de pontos */
         #points-wallet {
             width: 100%;
             max-width: 120px;
-            background-color: rgba(168, 168, 168, 0.8);
+            background-color: rgba(168, 168, 168, 0.9);
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 18px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
 
         #points-wallet h2 {
-            text-align: center;
+            font-size: 16px;
+            margin: 0;
         }
 
         #points-wallet p {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        /* Estilos para a seção de compartilhamento de feeds e fotos */
+        #shared-content-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #shared-content-box h2 {
             text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para os botões de acesso ao conteúdo compartilhado */
+        .postagem {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .postagem button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .postagem button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -181,84 +199,75 @@
             <h2>Carteira de Pontos</h2>
             <p id="user-points">Pontos: 20</p>
         </section>
-        <section id="profile-link-box">
-            <h2>Compartilhe seus Feeds Storys e Fotos</h2>
-            <p class="copy">Divulgue seu perfil organicamente com potencial de tráfego pago. <a href="#">Saiba mais</a></p>
+        <section id="profile-link-box" class="content-box">
+            <p class="copy">
+               Mas aqui está o melhor: ganhe pontos a cada ação! 😲<br>
+                1 ponto por cada curtida 💖<br>
+                1 ponto por cada comentário 🗨️<br>
+                E o que você pode fazer com esses pontos? 🤔<br>
+                <br>
+                Quando você acumular 2 pontos, você pode impulsionar sua própria publicação para alcançar mais pessoas e obter ainda mais curtidas, comentários e compartilhamentos! 🚀🔝<br>
+                <br>
+                O aplicativo perfeito para aqueles que buscam conexões autênticas e crescimento na rede social! 🤝<br>
+                <br>
+                comece a acumular pontos enquanto sua presença na rede social decola! 📱💥<br>
+                <br>
+                #Compartilhar. #Curtir. #Comentar. #Crescer. 📈💫
+            </p>
+            
+            <h2>Compartilhe seus Feeds, Stories e Fotos</h2>
+            <p>Divulgue seu perfil organicamente com potencial de tráfego pago.
             <form id="postForm">
                 <label for="linkPostagem">Link do seu Perfil:</label>
                 <input type="text" id="linkPostagem" required>
                 <button type="submit">Compartilhar</button>
             </form>
+            <p class="copy">Cada compartilhamento custa 2 pontos.</p>
         </section>
 
         <section id="shared-content-box">
-            <h2>Ganhe Pontos Curtindo e Comentando Feeds Storys e Fotos</h2>
+            <h2>Ganhe Pontos Curtindo e Comentando Feeds, Stories e Fotos</h2>
             <div id="sharedContent">
                 <!-- Aqui serão exibidos os botões de acesso ao conteúdo compartilhado -->
             </div>
         </section>
-
-
-        </section>
-        
-
-
     </main>
 
     <footer>
-        &copy; 2023 Criado Com o proposito de uma Divulgação organica de perfil de Rede Social
+        &copy; 2023 Criado com o propósito de uma divulgação orgânica de perfil de Rede Social
     </footer>
 
     <script>
-        // Simulação de base de dados
-        const database = [];
         // Simulação de carteira de pontos para o usuário
         let userPoints = 20; // Começa com 20 pontos
         const userPointsDisplay = document.getElementById('user-points');
 
-        // Função para adicionar dados à "base de dados" (simulação)
-        function addToDatabase(data) {
-            database.push(data);
-            updateDatabaseList();
-        }
-
-        // Função para atualizar a lista na página
-        function updateDatabaseList() {
-            // ... (código anterior) ...
-        }
-
         // Função para adicionar conteúdo compartilhado
-function addSharedContent(content) {
-    const sharedContent = document.getElementById('sharedContent');
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'postagem';
+        function addSharedContent(content) {
+            const sharedContent = document.getElementById('sharedContent');
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'postagem';
 
-    // Botão "Acesso ao Link"
-    const openLinkButton = document.createElement('button');
-    openLinkButton.textContent = 'Acesso ao Link';
-    let isButtonClicked = false; // Variável para controlar se o botão foi clicado
+            // Botão "Acesso ao Link"
+            const openLinkButton = document.createElement('button');
+            openLinkButton.textContent = 'Acesso ao Link';
+            openLinkButton.addEventListener('click', function () {
+                if (userPoints >= 2) { // Verifica se o usuário tem pelo menos 2 pontos
+                    window.open(content, '_blank'); // Abre o link em uma nova guia
+                    // Remove 2 pontos do usuário ao clicar no botão
+                    userPoints -= 2;
+                    updatePointsDisplay();
+                    openLinkButton.disabled = true; // Desabilita o botão após o compartilhamento
+                } else {
+                    alert('Você não tem pontos suficientes para compartilhar. Acumule pelo menos 2 pontos.');
+                }
+            });
 
-    openLinkButton.addEventListener('click', function () {
-        if (!isButtonClicked) { // Verifica se o botão não foi clicado antes
-            window.open(content, '_blank'); // Abre o link em uma nova guia
-            // Adiciona 1 ponto ao usuário ao clicar no botão
-            userPoints += 1;
-            updatePointsDisplay();
-            isButtonClicked = true; // Define a variável como true para evitar cliques repetidos
-            openLinkButton.disabled = true; // Desabilita o botão
+            contentDiv.appendChild(openLinkButton);
+            contentDiv.style.marginBottom = '10px'; // Adicione uma margem inferior de 10px entre os botões
+
+            sharedContent.appendChild(contentDiv);
         }
-    });
-
-    contentDiv.appendChild(openLinkButton);
-    contentDiv.style.marginBottom = '10px'; // Adicione uma margem inferior de 10px entre os botões
-
-    sharedContent.appendChild(contentDiv);
-
-    // Diminui os pontos do usuário ao compartilhar
-    userPoints -= 2;
-    updatePointsDisplay();
-}
-
 
         // Função para atualizar a exibição de pontos do usuário
         function updatePointsDisplay() {
@@ -272,22 +281,14 @@ function addSharedContent(content) {
 
             const linkPostagem = document.getElementById('linkPostagem').value;
             if (linkPostagem) {
-                addToDatabase(linkPostagem);
                 addSharedContent(linkPostagem);
+                userPoints -= 2; // Remove 2 pontos ao compartilhar
+                updatePointsDisplay(); // Atualiza a exibição de pontos
                 document.getElementById('linkPostagem').value = ''; // Limpa o campo após o compartilhamento
             }
         });
 
-        // O restante do seu código JavaScript pode ser adicionado aqui
-
-        // Exemplo de uso: adicionar conteúdo compartilhado após algum tempo (1 hora)
-        setTimeout(function () {
-            const conteudoExemplo = 'https://exemplo.com';
-            addSharedContent(conteudoExemplo);
-        }, 3600000); // 1 hora em milissegundos
-
-        // Atualiza a lista da "base de dados" e os pontos do usuário na inicialização
-        updateDatabaseList();
+        // Atualiza os pontos do usuário na inicialização
         updatePointsDisplay();
     </script>
 </body>
