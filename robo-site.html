@@ -35,45 +35,34 @@
         }
 
         main {
-            display: flex; /* Divide a página em duas caixas */
-            flex-wrap: wrap; /* Permite que as caixas sejam empilhadas em telas menores */
-            justify-content: space-between; /* Espaço entre as duas caixas */
+            display: flex;
+            flex-direction: column; /* Alterado para uma coluna */
+            align-items: center; /* Centraliza o conteúdo na horizontal */
             padding: 20px;
         }
 
         /* Estilos para a caixa de compartilhamento de link do perfil */
         #profile-link-box {
-            flex: 1; /* Cresce para preencher o espaço disponível */
-            background-color: rgba(255, 255, 255, 0.0); /* Fundo branco com transparência */
-            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
             border-radius: 10px;
-            margin-right: 10px; /* Espaço à direita para separar da caixa de feeds */
-            margin-bottom: 10px; /* Espaço abaixo da caixa */
+            margin-bottom: 20px;
         }
 
-        /* Estilos para a caixa de feeds */
-        #feed-box {
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-            padding: 200px;
+        /* Estilos para a caixa de compartilhamento de fotos/feeds */
+        #shared-content-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
             border-radius: 10px;
-            margin-right: 20px; /* Espaço à direita para separar da caixa de curtidas/comentários */
-            margin-bottom: 20px; /* Espaço abaixo da caixa */
+            margin-bottom: 20px;
         }
 
-        /* Estilos para a caixa de curtidas/comentários */
-        #likes-comments-box {
-            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
-            padding: 200px;
-            border-radius: 10px;
-            margin-bottom: 20px; /* Espaço abaixo da caixa */
-        }
-
-        #profile-link-box p {
+        #profile-link-box p, #shared-content-box p {
             font-size: 14px;
             text-align: center;
         }
 
-        #profile-link-box .copy {
+        #profile-link-box .copy, #shared-content-box .copy {
             background-color: #007BFF;
             color: white;
             padding: 5px;
@@ -81,7 +70,7 @@
             text-align: center;
         }
 
-        #profile-link-box .copy a {
+        #profile-link-box .copy a, #shared-content-box .copy a {
             color: white;
             text-decoration: none;
         }
@@ -110,36 +99,35 @@
             padding: 5px 10px;
             cursor: pointer;
         }
-        
-        /* Estilos para as postagens no feed */
-        .postagem {
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box; /* Garante que a largura inclua preenchimento e bordas */
-            background-color: white;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil às postagens */
+
+        /* Estilos para os botões de ação */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
         }
 
-        .postagem img {
-            max-width: 100%; /* Garante que as imagens não ultrapassem a largura da postagem */
-            height: auto; /* Mantém a proporção da imagem */
-        }
-
-        .postagem button {
+        .action-buttons button {
             background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 5px;
             padding: 5px 10px;
             cursor: pointer;
-            margin-top: 10px;
         }
 
-        .postagem button:hover {
-            background-color: #0056b3; /* Cor quando o cursor passa por cima */
+        .action-buttons button:first-child {
+            margin-right: 5px; /* Adiciona margem à direita para separar os botões */
         }
+
+        .action-buttons a {
+            text-decoration: none;
+        }
+
+        .action-buttons button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
 </head>
 <body>
@@ -160,18 +148,10 @@
             </form>
         </section>
 
-        <section id="feed-box">
-            <h2>Feed de Postagens</h2>
-            <div id="feed">
-                <!-- Aqui serão exibidas as postagens do feed -->
-            </div>
-        </section>
-
-
-        <section id="likes-comments-box">
-            <h2>Curtidas e Comentários</h2>
-            <div id="curtidasComentarios">
-                <!-- Aqui serão exibidas as curtidas e comentários -->
+        <section id="shared-content-box">
+            <h2>Fotos e Feeds Compartilhados</h2>
+            <div id="sharedContent">
+                <!-- Aqui serão exibidas as fotos e feeds compartilhados -->
             </div>
         </section>
     </main>
@@ -181,8 +161,71 @@
     </footer>
 
     <script>
-        // O restante do seu código JavaScript permanece inalterado
-        // ...
+        // Função para adicionar conteúdo compartilhado
+        function addSharedContent(content) {
+            const sharedContent = document.getElementById('sharedContent');
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'postagem';
+            contentDiv.innerHTML = content;
+            sharedContent.appendChild(contentDiv);
+
+            // Adicionar botões de ação
+            const actionButtons = document.createElement('div');
+            actionButtons.className = 'action-buttons';
+            const openLinkButton = document.createElement('a');
+            openLinkButton.textContent = 'Abrir Link';
+            openLinkButton.href = content; // Define o link para o botão
+            openLinkButton.target = '_blank'; // Abrir o link em uma nova guia
+
+            actionButtons.appendChild(openLinkButton);
+            const likeButton = document.createElement('button');
+            likeButton.textContent = 'Curtir';
+            const commentButton = document.createElement('button');
+            commentButton.textContent = 'Comentar';
+
+            likeButton.addEventListener('click', function () {
+                // Ação de curtir (pode ser personalizada)
+                alert('Você curtiu esta postagem: ' + content);
+            });
+
+            commentButton.addEventListener('click', function () {
+                // Ação de comentar (pode ser personalizada)
+                alert('Você comentou nesta postagem: ' + content);
+            });
+
+            actionButtons.appendChild(likeButton);
+            actionButtons.appendChild(commentButton);
+            contentDiv.appendChild(actionButtons);
+        }
+
+        // Função para compartilhar conteúdo
+        document.getElementById('postForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const linkPostagem = document.getElementById('linkPostagem').value;
+            
+            // Verifique se o campo não está vazio
+            if (linkPostagem.trim() !== '') {
+                // Crie uma entrada com o conteúdo compartilhado
+                const content = `<p>${linkPostagem}</p>`;
+                addSharedContent(content);
+
+                // Limpe o campo após o compartilhamento
+                document.getElementById('linkPostagem').value = '';
+
+                // Remova o conteúdo compartilhado após 1 hora
+                setTimeout(function () {
+                    contentDiv.remove();
+                }, 3600000); // 1 hora em milissegundos
+            }
+        });
+
+        // O restante do seu código JavaScript pode ser adicionado aqui
+
+        // Exemplo de uso: adicionar conteúdo compartilhado após algum tempo (1 hora)
+        setTimeout(function () {
+            const conteudoExemplo = '<p>Conteúdo compartilhado após 1 hora</p>';
+            addSharedContent(conteudoExemplo);
+        }, 3600000); // 1 hora em milissegundos
     </script>
 </body>
 </html>
