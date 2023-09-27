@@ -2,297 +2,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divulgador de Rede Social</title>
+    <title>Venda de Robôs de Automação</title>
     <style>
-        /* Estilos para o aplicativo */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url('https://neilpatel.com/wp-content/uploads/2019/07/ilustracao-representando-smartphone-com-post-do-ap.jpeg');
+            background-image: url('https://burst.shopifycdn.com/photos/black-and-gold-carnival-mask.jpg?width=1000&format=pjpg&exif=0&iptc=0');
             background-size: cover;
             background-repeat: no-repeat;
-        }
-
-        header {
-            background-color: #333;
+            background-attachment: fixed;
+            background-position: center center;
             color: white;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 10px;
-        }
-
-        header h1 {
             margin: 0;
+            padding: 0;
         }
 
-        button {
+        h1 {
+            font-size: 36px;
+            margin: 20px 0;
+            font-family: 'Arial Black', sans-serif;
+            text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            display: flex; /* Alteração: use flexbox para alinhar os itens lado a lado */
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .robot {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .robot img {
+            max-width: 100%; /* Defina a largura máxima */
+            height: auto; /* Mantenha a proporção */
+            border-radius: 5px;
+        }
+
+        .robot h2 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .robot p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .robot button {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Estilo para a aba de upload de imagem */
+        .image-upload {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .image-upload label {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Estilo para a seção de depoimentos */
+        .profit-section {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .profit-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            width: 300px; /* Defina a largura máxima para os depoimentos */
+        }
+
+        .testimonial img {
+            max-width: 100%; /* Defina a largura máxima */
+            height: auto; /* Mantenha a proporção */
+            border-radius: 30%;
+            display: block; /* Centralize verticalmente */
+            margin: 0 auto; /* Centralize horizontalmente */
+            margin-bottom: 7px;
+        }
+
+        .testimonial p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: white;
+        }
+
+        .robot button:hover {
+            background-color: #460202;
+        }
+
+        .button-container {
+            margin: 20px;
+        }
+
+        .button-container a {
+            text-decoration: none;
+        }
+
+        .button-container button {
             background-color: #f33207;
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 5px 10px;
+            padding: 10px 20px;
+            font-size: 20px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        /* Estilos para a caixa de compartilhamento de link do perfil */
-        .content-box {
-            width: 100%;
-            max-width: 400px;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .content-box h2 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .content-box p {
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .copy {
-            background-color: #434446;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            margin-top: 11px;
-        }
-
-        .copy a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Estilos para o formulário de compartilhamento de link */
-        #postForm label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        #postForm input[type="text"] {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #postForm button[type="submit"] {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        /* Estilos para os botões de ação */
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .action-buttons button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .action-buttons button:first-child {
-            margin-right: 5px;
-        }
-
-        .action-buttons a {
-            text-decoration: none;
-        }
-
-        .action-buttons button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Estilos para a carteira de pontos */
-        #points-wallet {
-            width: 100%;
-            max-width: 120px;
-            background-color: rgba(168, 168, 168, 0.9);
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 18px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        #points-wallet h2 {
-            font-size: 16px;
-            margin: 0;
-        }
-
-        #points-wallet p {
-            font-size: 18px;
-            margin: 0;
-        }
-
-        /* Estilos para a seção de compartilhamento de feeds e fotos */
-        #shared-content-box {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        #shared-content-box h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* Estilos para os botões de acesso ao conteúdo compartilhado */
-        .postagem {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .postagem button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-
-        .postagem button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
+        .button-container button:hover {
+            background-color: #460202;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Divulgador De Rede Social</h1>
-        <button id="loginButton">Entrar</button>
-    </header>
-    
-    <main>
-        <section id="points-wallet">
-            <h2>Carteira de Pontos</h2>
-            <p id="user-points">Pontos: 20</p>
-        </section>
-        <section id="profile-link-box" class="content-box">
-            <p class="copy">
-               Mas aqui está o melhor: ganhe pontos a cada ação! 😲<br>
-                1 ponto por cada curtida 💖<br>
-                1 ponto por cada comentário 🗨️<br>
-                E o que você pode fazer com esses pontos? 🤔<br>
-                <br>
-                Quando você acumular 2 pontos, você pode impulsionar sua própria publicação para alcançar mais pessoas e obter ainda mais curtidas, comentários e compartilhamentos! 🚀🔝<br>
-                <br>
-                O aplicativo perfeito para aqueles que buscam conexões autênticas e crescimento na rede social! 🤝<br>
-                <br>
-                Comece a acumular pontos enquanto sua presença na rede social decola! 📱💥<br>
-                <br>
-                #Compartilhar. #Curtir. #Comentar. #Crescer. 📈💫
-            </p>
-            
-            <h2>Compartilhe seus Feeds, Stories e Fotos</h2>
-            <p>Divulgue seu perfil organicamente com potencial de tráfego pago.
-            <form id="postForm">
-                <label for="linkPostagem">Link do seu Perfil:</label>
-                <input type="text" id="linkPostagem" required>
-                <button type="submit">Compartilhar</button>
-            </form>
-            <p class="copy">Cada compartilhamento custa 2 pontos.</p>
-        </section>
+    <h1 style="font-family: 'Arial Black', sans-serif; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5);">
+        <span style="color: rgb(150, 5, 5);">Descubra</span>
+        <span style="color: rgb(8, 3, 3);">a</span>
+        <span style="color: rgb(150, 5, 5);">Revolução</span>
+        <span style="color: rgb(3, 2, 2);">Dos</span>
+        <span style="color: rgb(150, 5, 5);">Robôs</span>
+        <span style="color: rgb(5, 3, 3);">da</span>
+        <span style="color: rgb(150, 5, 5);">Roleta</span>
+        <span style="color: rgb(5, 3, 3);">!</span>
 
-        <section id="shared-content-box">
-            <h2>Ganhe Pontos Curtindo e Comentando Feeds, Stories e Fotos</h2>
-            <div id="sharedContent">
-                <!-- Aqui serão exibidos os botões de acesso ao conteúdo compartilhado -->
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        &copy; 2023 Criado com o propósito de uma divulgação orgânica de perfil de Rede Social
-    </footer>
-
-    <script>
-        // Simulação de carteira de pontos para o usuário
-        let userPoints = 20; // Começa com 20 pontos
-        const userPointsDisplay = document.getElementById('user-points');
-        const sharedLinks = new Set(); // Usado para rastrear links compartilhados
-    
-        // Função para adicionar conteúdo compartilhado
-        function addSharedContent(content) {
-            if (!sharedLinks.has(content)) {
-                sharedLinks.add(content); // Adiciona o link à lista de links compartilhados
-                const sharedContent = document.getElementById('sharedContent');
-                const contentDiv = document.createElement('div');
-                contentDiv.className = 'postagem';
-    
-                // Botão "Acesso ao Link"
-                const openLinkButton = document.createElement('button');
-                openLinkButton.textContent = 'Acesso ao Link';
-                openLinkButton.addEventListener('click', function () {
-                    window.open(content, '_blank'); // Abre o link em uma nova guia
-                    // Adiciona 1 ponto ao usuário ao abrir o link
-                    userPoints += 1;
-                    updatePointsDisplay();
-                    openLinkButton.disabled = true; // Desabilita o botão após abrir o link
-                });
-    
-                contentDiv.appendChild(openLinkButton);
-                contentDiv.style.marginBottom = '10px'; // Adicione uma margem inferior de 10px entre os botões
-    
-                sharedContent.appendChild(contentDiv);
+    </h1>
+        <style>
+            /* Estilos para o botão */
+            button {
+                background-color: #FF5733; /* Cor de fundo vermelha */
+                color: white; /* Cor do texto branca */
+                font-size: 24px; /* Tamanho da fonte maior */
+                padding: 15px 30px; /* Espaçamento interno maior para o botão */
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
             }
-        }
-    
-        // Função para atualizar a exibição de pontos do usuário
-        function updatePointsDisplay() {
-            userPointsDisplay.textContent = `Pontos: ${userPoints}`;
-        }
-    
-        // Função para processar o formulário de compartilhamento de perfil
-        const postForm = document.getElementById('postForm');
-        postForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // Impede o envio padrão do formulário
-    
-            const linkPostagem = document.getElementById('linkPostagem').value;
-            if (linkPostagem && !sharedLinks.has(linkPostagem)) {
-                addSharedContent(linkPostagem);
-                userPoints -= 2; // Remove 2 pontos ao compartilhar
-                updatePointsDisplay(); // Atualiza a exibição de pontos
-                document.getElementById('linkPostagem').value = ''; // Limpa o campo após o compartilhamento
-            } else if (sharedLinks.has(linkPostagem)) {
-                alert('Este link já foi compartilhado.');
+        
+            /* Estilos quando o cursor passa sobre o botão */
+            button:hover {
+                background-color: #460202; /* Mudança de cor quando o cursor passa sobre o botão */
             }
-        });
+        </style>
+        
+    </div>
+
+
+    <div class="container">
+        <div class="robot">
+            <img src="https://clubedovideogame.com.br/wp-content/uploads/2022/08/RoletaBrasileira_b.jpg" alt="Robô Sinais da Roleta">
+            <h2>Robo para mesa "Roleta Brasileira"</h2>
+            <p>Receba sinais altamente precisos para a roleta brasileira com nosso robô especializado.</p>
+            <p>Preço: $69.99</p>
+            <a href="https://pay.hotmart.com/K86904999G" target="_blank"><button>Comprar Agora</button></a>
+        </div>
+        <div class="robot">
+            <img src="https://assets.playtech.com/application/files/8915/9662/2643/playtech_pokerstars_spain_spinwin.jpg?version=1684399371" alt="Robô Sinais da Roleta">
+            <h2>Robo para mesa "Spin e Win Rolette"</h2>
+            <p>Receba sinais altamente precisos para a roleta Spin e Win com nosso robô especializado.</p>
+            <p>Preço: $79.99</p>
+            <a href="https://pay.hotmart.com/H86999764H" target="_blank"><button>Comprar Agora</button></a>
+        </div>
+    </div>
+
+    <!-- Seção para mostrar pessoas que estão tendo lucro -->
+    <div class="profit-section">
+        <h2>Pessoas que Estão Tendo Lucro</h2>
+        <div class="testimonial">
+            <img src="https://i.pinimg.com/750x/dc/2c/ad/dc2cad39c2677a2c631704048c8eb082.jpg" alt="Membro do Grupo FREE">
+            <p>Estou impressionado com os resultados deste robô!</p>
+        </div>
+
+        <div class="testimonial">
+            <img src="https://botcashroleta.com.br/wp-content/uploads/2023/03/03.jpeg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+
+        <div class="testimonial">
+            <img src="https://botcashroleta.com.br/wp-content/uploads/2023/03/04.jpeg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+        
+        <div class="testimonial">
+            <img src="https://botcashroleta.com.br/wp-content/uploads/2023/03/06.jpeg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+
+        <div class="testimonial">
+            <img src="https://botcashroleta.com.br/wp-content/uploads/2023/03/05.jpeg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+
+
+        <div class="testimonial">
+            <img src="https://botcashroleta.com.br/wp-content/uploads/2023/03/09.jpeg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+
+        <div class="testimonial">
+            <img src="https://i.pinimg.com/750x/1f/b2/85/1fb2855191183d7c4a00dcbfe8ffa4bb.jpg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+        <div class="testimonial">
+            <img src="https://i.pinimg.com/750x/fa/bd/74/fabd749a029bb6450a3b31ffea22293e.jpg" alt="Membro do Grupo FREE">
+            <p>Os sinais deste robô são incrivelmente precisos!</p>
+        </div>
+        <div class="button-container">
+            <h2>🏴‍☠️ Junte-se ao Grupo VIP Pirata Black! 🏴‍☠️</h2>
+            <p>Pronto para elevar seus investimentos ao próximo nível?</p>
+            <p>✅ Sinais de Roleta 24/7 para lucros oportunos</p>
+            <p>✅ Análises em tempo real por especialistas</p>
+            <p>✅ Oportunidades exclusivas para membros VIP</p>
+            <p>✅ Suporte dedicado para seus objetivos financeiros</p>
+            <p>Apenas 💲20/mês para maximizar seus lucros!</p>
+            <p>Junte-se agora e invista com confiança! 💰</p>
+            <button><a href="https://wa.me/5548999626351" target="_blank" style="text-decoration: none; color: white;">Junte-se Agora</a></button>
     
-        // Atualiza os pontos do usuário na inicialização
-        updatePointsDisplay();
-    </script>
+            <div class="copy-section">
+                <h2>🏴‍☠️ Entre na Sala de Sinais Grátis do Pirata!</h2>
+                <p>🚀 Limite de até 20 sinais por dia.  </p>
+                <p>Aproveite esta oportunidade exclusiva e junte-se agora! 🏴‍☠️💰</p>
+            <a href="https://t.me/sinaisdaroletapirata" target="_blank"><button>GRUPO SINAIS FREE</button></a>
     
+
+        <h2>Como Funciona Os SINAIS</h2>
+        <div class="testimonial">
+            <img src="https://i.pinimg.com/750x/83/c2/95/83c295be98b9096db63a64ba95f72cc1.jpg" alt="Membro do Grupo FREE">
+            <p>Copiar o SINAL e Colar na Mesa</p>
+        </div>
+
+        <div class="testimonial">
+            <img src="https://i.pinimg.com/750x/cc/c9/01/ccc901e24f06a43edc5eae47ac3f8fa7.jpg" alt="Membro do Grupo FREE">
+            <p>SIMPLES e FACIL!  e aguarde o WIN</p>
+        </div>
+
+        
+        <div class="testimonial">
+            <img src="https://i.pinimg.com/750x/72/d1/e0/72d1e00dab87536057bc38e6334e5f1d.jpg" alt="Membro do Grupo FREE">
+            <p>WIN</p>
+        </div>
+
+
+        <!-- Adicione mais depoimentos conforme necessário -->
+    </div>
+
+    <!-- Video sections for each robot -->
+    <div class="container">
+        <div class="video">
+            <iframe width="320" height="560" src="https://www.youtube.com/embed/eW5uRo1PWAI" title="Grupo de Sinais robo hacker da roleta brasileira" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>    
+
+        </div>
+    </div>
 </body>
-
+</html>
